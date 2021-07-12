@@ -1,0 +1,16 @@
+---
+console_splash:
+  - "_______"
+  - "/       \\"
+  - "|  osu! |     smack-bot"
+  - "\\_______/"
+  - "_____________________________________"
+Run: # bot.run() strings
+  login_start: "Attempting connection to Discord..."
+  login_fail: "LoginFailure Exception: check bot token or internet connection"
+
+Token: # get_env_token() strings
+  not_found: |-
+    ERROR: {var_name} environment variable not found.
+    Check OS environment variables or /.env file
+...

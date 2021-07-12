@@ -1,0 +1,14 @@
+# .env file
+.env
+
+# Python files
+__pycache__
+*/__pycache__
+venv
+
+# IDE files
+.vscode/
+.idea/
+
+# Github stuff
+.git/

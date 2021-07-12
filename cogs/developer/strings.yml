@@ -1,0 +1,13 @@
+---
+# !log() message template for devs manually sending logs
+log: "{user} - {message}"
+
+Reload: # reload() command for reloading extensions/cogs
+  # Reply Strings
+  reloading_reply : "'{ext}' successfully reloaded."
+  reload_reply: "'{ext}' successfully reloaded."
+  # Log Strings
+  start_log: "{user} invoked reload '{ext}'"
+  reloading_log: "Re-loading '{ext}'..."
+  load_fail_log: "Exception {e}"
+...

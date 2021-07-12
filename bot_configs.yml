@@ -1,0 +1,28 @@
+---
+# Configurations set here should be mostly used to setup the environment for
+# the bot, such as initial cog load order, osu! API links,
+# and other things.
+#
+# Discord Configurations
+# ---
+token_envar_name: 'OSU_BOT_TOKEN'
+  # Environmental Variable name for the bot's secret Discord token for login.
+  # Checks OS envars, then checks variables assigned in /.env
+command_prefix: '!'
+  # Prefix that the bot will listen to in Discord chat messages
+status: 'online'
+  # discord.Status [online, idle, dnd, invisible, offline]
+
+activity: # needs a good message
+  type: 'watching'
+    # discord.ActivityType
+  name: "for commands in chat"
+
+# Startup Configurations
+# ---
+cogs: # Initial cog load order
+  - 'cogs.logger'
+  - 'cogs.developer'
+disabled_cogs: # not implemented
+  -
+...

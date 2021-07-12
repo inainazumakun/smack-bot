@@ -1,0 +1,11 @@
+---
+command_log: "{user} {msg}"
+command_error_log: "Exception {error}"
+command_not_found_log: "{e}: {user} {msg}"
+bot_ready_log: 'Bot successfully connected to Discord.'
+bot_disconnect_log: 'Bot disconnected from Discord.'
+
+Ext: # on_load_extension() strings
+  load_fail_log: "Exception {failed} - '{extension}' failed to load!."
+  load_success_log: "'{extension}' successfully loaded."
+...
