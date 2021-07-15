@@ -36,10 +36,12 @@ class Logger(commands.Cog):
             invoke_log = STRINGS.command_log.format(
                 user=ctx.author, msg=ctx.message.content)
             self.bot.log(invoke_log, LogType.WARN)
+
             error_message = STRINGS.command_error_log.format(
                 error=error
             )
             self.bot.log(error_message, LogType.ERROR)
+            raise error
 
     @commands.Cog.listener()
     async def on_log(self, log):
@@ -51,12 +53,12 @@ class Logger(commands.Cog):
         """Listener for bot.load_extension"""
         if failed:
             self.bot.log(STRINGS.Ext.load_fail_log.format(
-                failed=str(failed), extension=extension
-            ), LogType.ERROR)
+                            failed=str(failed), extension=extension),
+                         LogType.ERROR)
         else:
             self.bot.log(STRINGS.Ext.load_success_log.format(
-                extension=extension
-            ), LogType.STATUS)
+                                        extension=extension),
+                         LogType.STATUS)
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -72,7 +74,6 @@ class Logger(commands.Cog):
         # for now, everything goes
         # TODO: eventually also print to a discord channel
         self.logs_cache.append(log)
-        # Checks if the log is an ERROR log, and will color log message text if so
         print(log)
 
 

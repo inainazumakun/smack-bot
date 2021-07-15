@@ -1,5 +1,8 @@
 import inspect
 from pathlib import PurePath
+
+import discord.ext.commands
+
 from config import LogType, Log
 from discord.ext.commands import Bot
 from datetime import datetime
@@ -46,14 +49,23 @@ class OsuBot(Bot):
         """
         try:
             super().load_extension(name)
+            # Dispatch event with parameters ``cog_name`` and ``error`` (if any)
             self.dispatch('load_extension', name, False)
         except Exception as failed:
             self.dispatch('load_extension', name, failed)
-            # TODO: decide if we want to raise an exception here, or just continue along
             raise
 
     def load_all_extension(self, ext_list, **kwargs):
         """A quick script to quickly load several extensions at once.
         """
         for cog in list(ext_list):
+            self.log(f"Loading extension '{cog}'", LogType.WARN)
             self.load_extension(cog, **kwargs)
+
+    def db(self):
+        cog = self.get_cog('Database')
+        if cog:
+            return cog
+        else:
+            raise discord.ext.commands.ExtensionNotLoaded('Database cog is not running')
+
