@@ -1,0 +1,15 @@
+---
+# Database Configurations
+# ---
+user_name: ''
+user_pass: ''
+
+host_name: "localhost"
+host_port: "27017"
+connect_timeout: 1 # time in milliseconds to check connection
+
+database_name: "osu_bot"
+
+
+
+...

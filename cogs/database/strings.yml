@@ -1,0 +1,6 @@
+---
+Connect:
+  start_log: "Attempting connection to {db_server}..."
+  fail_log: "Connection to database server timed out."
+  success_log: "Database Connection established."
+...
