@@ -59,7 +59,7 @@ the following main functions:
         Outputs a recursively generated data class object from dictionaries
 """
 import yaml
-from dataclasses import dataclass, make_dataclass
+from dataclasses import dataclass, make_dataclass, asdict
 
 # Path template for .yml files
 BOT_CONFIGS_PATH = "bot_configs.yml"
@@ -68,6 +68,7 @@ BOT_STRINGS_PATH = "bot_strings.yml"
 COG_STRINGS_PATH = "cogs/{}/strings.yml"
 COG_CONFIGS_PATH = "cogs/{}/configs.yml"
 
+DB_CONFIGS_PATH = "db_configs.yml"
 
 @dataclass
 class LogType:
@@ -218,7 +219,39 @@ def get_bot_strings():
     return generate_classes(strings)
 
 
+def get_discord_token():
+    """Retrieves the bot's secret token from a .env or OS environment variables
+    Defined in BOT_CONFIGS_PATH
+    """
+    return __get_env(ENVAR_NAMES.token_envar_name)
+
+
+def get_api_credentials():
+    """Retrieves the bot's API credentials from a .env or OS environment variables
+    Defined in BOT_CONFIGS_PATH
+    """
+    credentials = [('id', None, __get_env(ENVAR_NAMES.client_id_name)),
+                   ('secret', None, __get_env(ENVAR_NAMES.api_envar_name))]
+    return make_dataclass('API Credentials', credentials, frozen=True)
+
+
+def __get_env(var_name):
+    from os import getenv
+    from dotenv import load_dotenv
+
+    load_dotenv()
+    token = getenv(var_name)
+    return token
+
+
+def as_dict(obj):
+    return asdict(obj)
+
+
 def get(path):
     """Override method to read and parse a .yml file from path
     """
     return generate_classes(read_yml(path))
+
+
+ENVAR_NAMES = get_bot_configs().env

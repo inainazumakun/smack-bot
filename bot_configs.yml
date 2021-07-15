@@ -1,13 +1,16 @@
 ---
 # Configurations set here should be mostly used to setup the environment for
-# the bot, such as initial cog load order, osu! API links,
-# and other things.
+# the bot, such as initial cog load order and other things.
 #
 # Discord Configurations
 # ---
-token_envar_name: 'OSU_BOT_TOKEN'
-  # Environmental Variable name for the bot's secret Discord token for login.
-  # Checks OS envars, then checks variables assigned in /.env
+
+env: # Environmental Variable Names (from .env or defined ENV variables)
+  token_envar_name: 'OSU_BOT_TOKEN' # Discord App Bot secret
+  api_envar_name: 'OSU_API_TOKEN' # API Client secret
+  client_id_name: 'OSU_CLIENT_ID' # API Client ID number
+  irc_envar_name: 'OSU_IRC_TOKEN' # osu!chat IRC token
+
 command_prefix: '!'
   # Prefix that the bot will listen to in Discord chat messages
 status: 'online'
@@ -23,6 +26,8 @@ activity: # needs a good message
 cogs: # Initial cog load order
   - 'cogs.logger'
   - 'cogs.developer'
-disabled_cogs: # not implemented
+  - 'cogs.database'
+  - 'cogs.api'
+disabled_cogs: # overrides cog load order
   -
 ...

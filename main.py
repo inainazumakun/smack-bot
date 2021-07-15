@@ -11,7 +11,7 @@ STRINGS = config.get_bot_strings()
 
 def main():
     # Retrieve bot token from .env or OS environment variables. (token_envar_name from configs)
-    token = get_env_token(CONFIGS.token_envar_name)
+    token = config.get_discord_token()
 
     # Initialize bot
     for line in STRINGS.console_splash:
@@ -22,7 +22,7 @@ def main():
         type=getattr(discord.ActivityType, CONFIGS.activity.type),
         name=CONFIGS.activity.name)
 
-    # Construct ThmBOT object with configurations from configs, including command prefix
+    # Construct OsuBot object with configurations from configs, including command prefix
     bot = OsuBot(CONFIGS.command_prefix,
                  activity=activity,
                  status=CONFIGS.status)
@@ -39,26 +39,12 @@ def main():
 def run(bot, token):
     """Function for attempting a connection and login with the bot and Discord servers.
     """
-    bot.log(STRINGS.Run.login_start, LogType.WARN)
+    bot.log(STRINGS.Run.login_start_log, LogType.WARN)
     try:
         bot.run(token)
-    except discord.LoginFailure:
-        bot.log(STRINGS.Run.login_fail)
-
-
-def get_env_token(var_name):
-    """Retrieves the bot's secret token from a .env or OS environment variables
-    """
-    from os import getenv
-    from dotenv import load_dotenv
-
-    load_dotenv()
-    token = getenv(var_name)
-    if not token:
-        print(STRINGS.Token.not_found.format(var_name=var_name))
-        raise EnvironmentError(f"'{var_name}' environmental variable undefined")
-    else:
-        return token
+    except (discord.LoginFailure, RuntimeError) as e:
+        bot.log(STRINGS.Run.login_fail_log.format(e=type(e).__name__), LogType.ERROR)
+        bot.log((str(e)), LogType.ERROR)
 
 
 if __name__ == "__main__":

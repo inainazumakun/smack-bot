@@ -1,13 +1,13 @@
 ---
-console_splash:
+console_splash: # scuffed
   - "_______"
   - "/       \\"
   - "|  osu! |     smack-bot"
   - "\\_______/"
   - "_____________________________________"
 Run: # bot.run() strings
-  login_start: "Attempting connection to Discord..."
-  login_fail: "LoginFailure Exception: check bot token or internet connection"
+  login_start_log: "Attempting connection to Discord..."
+  login_fail_log: "{e}: check bot token or internet connection"
 
 Token: # get_env_token() strings
   not_found: |-
