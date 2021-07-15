@@ -1,0 +1,13 @@
+---
+Auth: # request_auth()
+  start_log: "Sending API authorization request to {url}..."
+  success_log: "API Token successfully generated and saved."
+  fail_log: "Error while attempting to authenticate API token!"
+  error_log: "Malformed response from API: {error}"
+Client: # client()
+  create_log: "Initializing HTTP client..."
+  fail_log: "HTTP client failed to initialize!"
+  success_log: "Authorized HTTP client successfully started."
+Fetch: # fetch()
+  start_log: "Fetching {url}..."
+...

@@ -1,0 +1,21 @@
+---
+# API Endpoint Configurations
+# ---
+api: # Definition of API endpoint URLs
+  auth: 'https://osu.ppy.sh/oauth/token'
+  get_user: 'https://osu.ppy.sh/api/v2/users/{user}/{mode}'
+  recent: 'https://osu.ppy.sh/api/v2/users/{user}/recent_activity'
+  scores: 'https://osu.ppy.sh/api/v2/users/{user}/scores/{type}'
+
+  Params: # Optional parameters for above-defined endpoints
+    recent:
+      - limit
+      - offset
+    scores:
+      - limit
+      - offset
+      - mode
+    auth:
+      grant_type: 'client_credentials'
+      scope: 'public'
+...
